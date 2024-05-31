@@ -1,10 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
+const pinRoute = require('./routes/PinsRoute.js');
 
 
 const app = express();
 const port = process.env.PORT
+
+// is used to parse incoming JSON requests. It is a built-in middleware function in Express that parses incoming requests with JSON payloads and makes the parsed data available in req.body.
+
+app.use(express.json());
 
 
 //mongodb config
@@ -18,6 +23,8 @@ mongoose.connect(process.env.MONGO_URL, {
     .catch((error) => {
         console.error("Error connecting to database", error);
     })
+
+app.use("/api/pins", pinRoute);
 
 //listeners
 app.listen(port, () => {
