@@ -14,15 +14,15 @@ app.use(express.json());
 
 //mongodb config
 
-mongoose.connect(process.env.MONGO_URL, {
-    useUnifiedTopology: true,// ensures that Mongoose uses the new Server Discovery and Monitoring engine
-
-}).then(() => {
-    console.log('connected to database');
-})
+mongoose.connect(process.env.MONGO_URL
+)
+    .then(() => {
+        console.log('connected to database');
+    })
     .catch((error) => {
         console.error("Error connecting to database", error);
     })
+
 
 app.use("/api/pins", pinRoute);
 
