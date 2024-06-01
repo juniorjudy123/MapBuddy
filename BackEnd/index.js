@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const pinRoute = require('./routes/PinsRoute.js');
+const userRoute = require('./routes/UsersRoute.js');
 
 
 const app = express();
@@ -25,6 +26,7 @@ mongoose.connect(process.env.MONGO_URL
 
 
 app.use("/api/pins", pinRoute);
+app.use("/api/users", userRoute)
 
 //listeners
 app.listen(port, () => {
