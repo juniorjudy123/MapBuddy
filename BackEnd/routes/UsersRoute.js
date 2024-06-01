@@ -30,4 +30,32 @@ router.post('/register', async (req, res) => {
     }
 });
 
+//login
+router.post('/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        //valdate input
+        if (!username || !password) {
+            return res.status(400).json({ error: 'All fields are required' })
+        }
+        //find user
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(400).json({ error: "wrong credentials" })
+        }
+        //validate password
+        const validPassword = await bcrypt.compare(password, user.password);
+        if (!validPassword) {
+            return res.status(400).json({ error: "wrong credentials" })
+        }
+        //otherwise send success message
+        res.status(200).json({ _id: user._id, username: username })
+    }
+    catch (error) {
+        console.error("Error during login", error);
+        res.status(500).json(error);
+    }
+
+})
 module.exports = router
