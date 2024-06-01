@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Map, { Marker, Popup } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import PopupCardComponent from './components/PopupCardComponent';
 
 function App() {
   const [viewport, setViewport] = useState({
@@ -34,8 +35,9 @@ function App() {
         {showPopup && (
           <Popup longitude={76.8671} latitude={8.8607}
             anchor="top"
-            onClose={() => setShowPopup(false)}>
-            You are here
+          >
+            <PopupCardComponent />
+
           </Popup>)}
       </Map>
     </div>
