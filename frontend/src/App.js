@@ -8,13 +8,15 @@ import axios from 'axios'
 
 function App() {
   const [pins, setPins] = useState([])
+  const [newPlace, setNewPlace] = useState(null)
+  const currentUser = "Benoy"
   const [currentPlaceId, setCurrentPlaceId] = useState(null)
   const [viewport, setViewport] = useState({
     longitude: 76.8671,
     latitude: 8.8607,
     zoom: 4
   });
-  const [showPopup, setShowPopup] = useState(true);
+
   // Function to handle marker clicks
 
   const handleLocationClick = (id) => {
@@ -37,6 +39,18 @@ function App() {
     getPins();
   }, []);
 
+  const handleAddClick = (e) => {
+    console.log(e.lngLat)
+    const { lng, lat } = e.lngLat
+    setNewPlace({
+      latitude: lat,
+      longitude: lng,
+    })
+
+
+  };
+
+
 
 
   const handleViewportChange = (newViewport) => {
@@ -51,6 +65,8 @@ function App() {
         onViewportChange={handleViewportChange}
         style={{ width: '100VW', height: '100VH' }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
+        transitionDuration="500"
+        onDblClick={handleAddClick}
       >
 
         {pins.map(p => (
@@ -58,8 +74,8 @@ function App() {
             <Marker longitude={p.longitude} latitude={p.latitude} anchor="bottom" >
 
               <LocationOnIcon
-                style={{ fontSize: '24px' }}
-                className="text-blue-600 cursor-pointer"
+                style={{ fontSize: '24px', color: p.username === currentUser ? "tomato" : "slateblue", cursor: 'pointer' }}
+
                 onClick={() => handleLocationClick(p._id)}
               />
 
@@ -76,9 +92,20 @@ function App() {
               >
                 <PopupCardComponent pin={p} />
               </Popup>
-            )})
-          </div>))}
-
+            )}
+          </div>
+        ))}
+        {newPlace &&
+          <Popup
+            longitude={newPlace.longitude}
+            latitude={newPlace.latitude}
+            anchor="top"
+            onClose={() => setCurrentPlaceId(null)}
+            closeOnClick={false}
+          >
+            <newPlaceCardComponent />
+          </Popup>
+        }
       </Map>
     </div >
   );
