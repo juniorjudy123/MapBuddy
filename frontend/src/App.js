@@ -8,7 +8,8 @@ import axios from 'axios'
 
 
 function App() {
-  const currentUser = "Nimmy";
+  const [currentUser, setCurrentUser] = useState(null)
+
   const [pins, setPins] = useState([])
   const [newPlace, setNewPlace] = useState(null)
   const [currentPlaceId, setCurrentPlaceId] = useState(null)
@@ -182,7 +183,16 @@ function App() {
             </div>
 
           </Popup>
+
         }
+
+        {currentUser ? <button className="bg-tomato absolute top-5 right-5 m-1 opacity-85 rounded-lg p-3 text-white">Log Out</button> :
+          <div className='flex flex-row m-1 top-5 left-5 absolute opacity-85'>
+            <button className="bg-teal-600 hover:bg-teal-700 rounded-lg p-3 text-white mx-1">Log In</button>
+            <button className="bg-slate-600 hover:bg-slate-700 rounded-lg p-3 text-white mx-1">Register</button>
+          </div>
+        }
+
       </Map>
     </div >
   );
