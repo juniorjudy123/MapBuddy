@@ -17,13 +17,7 @@ const PopupCardComponent = ({ pin }) => {
 			<label className="text-tomato font-light  border-b-0.5 border-tomato  w-fit h-fit ">
 				Rating
 			</label>
-			<div className="text-gold">
-				<StarIcon />
-				<StarIcon />
-				<StarIcon />
-				<StarIcon />
-				<StarIcon />
-			</div>
+			<div className="text-gold">{Array(pin.rating).fill(<StarIcon />)}</div>
 			<label className="text-tomato font-light  border-b-0.5 border-tomato  w-fit h-fit ">
 				Information
 			</label>
