@@ -4,11 +4,13 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PopupCardComponent from './components/PopupCardComponent';
 import axios from 'axios'
+import RegisterComponent from './components/RegisterComponent';
 
 
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null)
+  // const [currentUser, setCurrentUser] = useState(null)
+  const currentUser = 'Nimmy';
 
   const [pins, setPins] = useState([])
   const [newPlace, setNewPlace] = useState(null)
@@ -128,9 +130,11 @@ function App() {
             onClose={() => setNewPlace(null)}
             closeOnClick={false}
           >
-            <div className=" bg-white rounded-lg  p-4 w-60">
+            <div className=" bg-white rounded-lg  p-4  border-1 w-[100%] ">
+              <div className='flex justify-center'><img src="..\assets\mappinfavicon.jpg" alt=" logo-img" className='w-10 h-10  ' />
+              </div>
               <form
-                className="flex flex-col justify-between h-full  "
+                className="flex flex-col justify-between h-full my-5 "
                 onSubmit={handleSubmit}
               >
                 <label
@@ -192,8 +196,9 @@ function App() {
             <button className="bg-slate-600 hover:bg-slate-700 rounded-lg p-3 text-white mx-1">Register</button>
           </div>
         }
+        <RegisterComponent />
 
-      </Map>
+      </Map >
     </div >
   );
 }
