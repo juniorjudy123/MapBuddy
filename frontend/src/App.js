@@ -146,7 +146,8 @@ function App() {
             )}
           </div>
         ))}
-        {newPlace &&
+
+        {newPlace && currentUser &&
           <Popup
             longitude={newPlace.longitude}
             latitude={newPlace.latitude}
