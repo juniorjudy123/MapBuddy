@@ -111,7 +111,7 @@ function App() {
   return (
     <div className="App">
       <Map
-        mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         initialViewState={viewport}
         onViewportChange={handleViewportChange}
         style={{ width: '100VW', height: '100VH' }}
