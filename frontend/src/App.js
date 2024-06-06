@@ -134,7 +134,7 @@ function App() {
             </Marker>
 
 
-            {p._id === currentPlaceId && (
+            {p._id === currentPlaceId && currentUser && (
               <Popup
                 longitude={p.longitude}
                 latitude={p.latitude}
@@ -157,7 +157,7 @@ function App() {
             closeOnClick={false}
           >
             <div className=" bg-white rounded-lg  p-4  border-1 w-[100%] ">
-              <div className='flex justify-center'><img src="..\assets\mappinfavicon.jpg" alt=" logo-img" className='w-10 h-10  ' />
+              <div className='flex justify-center'><img src="..\assets\mappinfavicon.jpg" alt=" logo-img" className='w-10 h-10 ' />
               </div>
               <form
                 className="flex flex-col justify-between h-full my-5 "
@@ -218,7 +218,7 @@ function App() {
 
         {currentUser ? (<button className="bg-red-400 hover:bg-red-500 absolute top-5 right-5 m-1 opacity-85 rounded-lg p-3 text-white" onClick={handleLogout} >Log Out </button>) :
 
-          <div className='flex flex-row m-1 top-5 left-5 absolute opacity-85'>
+          <div className='flex flex-row m-1 top-5 right-5 absolute opacity-85'>
             <button className="bg-teal-600 hover:bg-teal-700 rounded-lg p-3 text-white mx-1 cursor-pointer" onClick={handleLoginButton}>Log In</button>
             <button className="bg-slate-600 hover:bg-slate-700 rounded-lg p-3 text-white mx-1 cursor-pointer" onClick={handleRegisterButton}>Register</button>
           </div>

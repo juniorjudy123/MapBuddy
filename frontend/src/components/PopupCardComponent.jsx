@@ -5,7 +5,7 @@ import { format } from "timeago.js"
 
 const PopupCardComponent = ({ pin }) => {
 	return (
-		<div className="  w-52 h-52 flex flex-col justify-around">
+		<div className="  w-52 flex flex-col justify-around">
 			<label className="text-tomato font-light  border-b-0.5 border-tomato  w-fit h-fit ">
 				Place
 			</label>
