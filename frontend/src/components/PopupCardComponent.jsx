@@ -28,6 +28,7 @@ const PopupCardComponent = ({ pin }) => {
 				<QueryBuilderIcon className="w-4 h-4 mr-1 " />
 				<span className="font-thin text-gray-500">{format(pin.createdAt)}</span>
 			</div>
+			{/* <CancelRoundedIcon className="position absolute top-4 right-4 cursor-pointer " /> */}
 		</div>
 	)
 }

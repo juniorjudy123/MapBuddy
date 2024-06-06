@@ -7,7 +7,15 @@ const User = require('../models/User');
 //register
 
 router.post('/register', async (req, res) => {
+
     try {
+        // Check if username or email already exists
+        const existingUser = await User.findOne({ $or: [{ username: req.body.username }, { email: req.body.email }] });
+        if (existingUser) {
+            // User or email already exists, send error response
+            return res.status(409).json({ error: 'Username or email already exists' });
+        }
+
         //generate new password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(req.body.password, salt);

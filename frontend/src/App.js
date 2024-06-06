@@ -5,13 +5,13 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PopupCardComponent from './components/PopupCardComponent';
 import axios from 'axios'
 import RegisterComponent from './components/RegisterComponent';
-
+import LoginComponent from './components/LoginComponent';
 
 
 function App() {
-  // const [currentUser, setCurrentUser] = useState(null)
-  const currentUser = 'Nimmy';
-
+  const [currentUser, setCurrentUser] = useState(null)
+  const [isLogin, setIsLogin] = useState(false);
+  const [isRegister, setIsRegister] = useState(false);
   const [pins, setPins] = useState([])
   const [newPlace, setNewPlace] = useState(null)
   const [currentPlaceId, setCurrentPlaceId] = useState(null)
@@ -25,6 +25,7 @@ function App() {
   const [title, setTitle] = useState(null)
   const [desc, setDesc] = useState(null)
   const [rating, setRating] = useState(1)
+  const myStorage = window.localStorage;
   // Function to handle marker clicks
 
   const handleLocationClick = (id, latitude, longitude) => {
@@ -40,6 +41,7 @@ function App() {
   // Fetch marker data on component mount
 
   useEffect(() => {
+
     const getPins = async () => {
       try {
         const res = await axios.get("/api/pins");
@@ -51,6 +53,14 @@ function App() {
     }
     getPins();
   }, []);
+
+  // on refres if the user is present in local storage it will login
+  useEffect(() => {
+    const storedUser = myStorage.getItem("user")
+    if (storedUser) {
+      setCurrentUser(storedUser)
+    }
+  }, [])
 
   const handleAddClick = (e) => {
     const { lng, lat } = e.lngLat
@@ -82,6 +92,20 @@ function App() {
     catch (error) {
       console.log(error)
     }
+  }
+
+  const handleLoginButton = () => {
+    setIsLogin(!isLogin);
+    setIsRegister(false);
+  }
+  const handleRegisterButton = () => {
+    setIsRegister(!isRegister);
+    setIsLogin(false);
+  }
+
+  const handleLogout = () => {
+    myStorage.removeItem('user');
+    setCurrentUser(null);
   }
 
   return (
@@ -190,13 +214,17 @@ function App() {
 
         }
 
-        {currentUser ? <button className="bg-tomato absolute top-5 right-5 m-1 opacity-85 rounded-lg p-3 text-white">Log Out</button> :
+        {currentUser ? (<button className="bg-red-400 hover:bg-red-500 absolute top-5 right-5 m-1 opacity-85 rounded-lg p-3 text-white" onClick={handleLogout} >Log Out </button>) :
+
           <div className='flex flex-row m-1 top-5 left-5 absolute opacity-85'>
-            <button className="bg-teal-600 hover:bg-teal-700 rounded-lg p-3 text-white mx-1">Log In</button>
-            <button className="bg-slate-600 hover:bg-slate-700 rounded-lg p-3 text-white mx-1">Register</button>
+            <button className="bg-teal-600 hover:bg-teal-700 rounded-lg p-3 text-white mx-1 cursor-pointer" onClick={handleLoginButton}>Log In</button>
+            <button className="bg-slate-600 hover:bg-slate-700 rounded-lg p-3 text-white mx-1 cursor-pointer" onClick={handleRegisterButton}>Register</button>
           </div>
         }
-        <RegisterComponent />
+
+        {isLogin && < LoginComponent setIsLogin={setIsLogin} myStorage={myStorage} setCurrentUser={setCurrentUser} />}
+
+        {isRegister && <RegisterComponent setIsRegister={setIsRegister} />}
 
       </Map >
     </div >
