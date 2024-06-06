@@ -111,15 +111,16 @@ function App() {
   return (
     <div className="App">
       <Map
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         initialViewState={viewport}
         onViewportChange={handleViewportChange}
         style={{ width: '100VW', height: '100VH' }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
         onDblClick={handleAddClick}
+
       >
 
-        {pins.map(p => (
+        {currentUser && pins.map(p => (
           < div key={p._id}>
 
             <Marker longitude={p.longitude} latitude={p.latitude} anchor="bottom" offetLeft={-viewport.zoom * 3.5} offsetTop={- viewport.zoom * 7}>
