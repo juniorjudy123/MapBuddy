@@ -127,7 +127,7 @@ function App() {
 
       >
 
-        {currentUser && pins.map(p => (
+        {currentUser && pins && pins.map(p => (
           < div key={p._id}>
 
             <Marker longitude={p.longitude} latitude={p.latitude} anchor="bottom" offetLeft={-viewport.zoom * 3.5} offsetTop={- viewport.zoom * 7}>
