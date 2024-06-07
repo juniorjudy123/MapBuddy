@@ -28,6 +28,8 @@ function App() {
   const myStorage = window.localStorage;
   // Function to handle marker clicks
 
+
+
   const handleLocationClick = (id, latitude, longitude) => {
     console.log('Marker clicked:', id);
     setCurrentPlaceId(id);
@@ -37,6 +39,11 @@ function App() {
       longitude: longitude
     })
   }
+
+
+  // Now, when you make axios requests, cookies will be included in cross-origin requests
+
+  axios.defaults.withCredentials = true;
 
   // Fetch marker data on component mount
 
