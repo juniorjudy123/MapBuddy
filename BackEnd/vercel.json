@@ -3,12 +3,8 @@
 	"builds": [{ "src": "js", "use": "@vercel/node" }],
 	"routes": [
 		{
-			"src": "/api/(.*)",
-			"dest": "backend/api/$1"
-		},
-		{
 			"src": "/(.*)",
-			"dest": "frontend/$1"
+			"dest": "/"
 		}
 	]
 }

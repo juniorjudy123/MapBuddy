@@ -17,7 +17,7 @@ app.use(express.json());
 cors
 app.use(cors(
     {
-        origin: ['https://map-buddy.vercel.app', 'https://map-buddy-benoys-projects.vercel.app'],
+        origin: [],
         methods: ['GET', 'Post'],
         Credentials: true,
     }
