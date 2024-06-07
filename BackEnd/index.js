@@ -15,29 +15,26 @@ const port = process.env.PORT
 app.use(express.json());
 
 cors
-app.use(cors(
-    {
-        origin: [],
-        methods: ['GET', 'Post'],
-        Credentials: true,
-    }
-))
+app.use(cors({
+    origin: ['https://map-buddy.vercel.app', 'https://map-buddy-benoys-projects.vercel.app'],
+    methods: ['GET', 'POST'],
+    credentials: true,
+}));
 //default response on deployment
 app.get('/', (req, res) => {
-    res.json("Hello")
+    res.json("Hello");
 });
 
 
 //mongodb config
 
-mongoose.connect(process.env.MONGO_URL
-)
+mongoose.connect(process.env.MONGO_URL)
     .then(() => {
         console.log('connected to database');
     })
     .catch((error) => {
         console.error("Error connecting to database", error);
-    })
+    });
 
 
 app.use("/api/pins", pinRoute);
