@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const pinRoute = require('./routes/PinsRoute.js');
 const userRoute = require('./routes/UsersRoute.js');
+const cors = require('cors');
+
 
 
 const app = express();
@@ -11,6 +13,19 @@ const port = process.env.PORT
 // is used to parse incoming JSON requests. It is a built-in middleware function in Express that parses incoming requests with JSON payloads and makes the parsed data available in req.body.
 
 app.use(express.json());
+
+cors
+app.use(cors(
+    {
+        origin: ['https://map-buddy.vercel.app', 'https://map-buddy-benoys-projects.vercel.app'],
+        methods: ['GET', 'Post'],
+        Credentials: true,
+    }
+))
+//default response on deployment
+app.get('/', (req, res) => {
+    res.json("Hello")
+});
 
 
 //mongodb config
