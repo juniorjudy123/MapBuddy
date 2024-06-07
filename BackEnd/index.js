@@ -20,10 +20,10 @@ app.use(cors({
     methods: ['GET', 'POST'],
     credentials: true,
 }));
-//default response on deployment
-app.get('/', (req, res) => {
-    res.json("Hello");
-});
+// //default response on deployment
+// app.get('/', (req, res) => {
+//     res.json("Hello");
+// });
 
 
 //mongodb config
